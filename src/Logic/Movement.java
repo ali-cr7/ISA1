@@ -30,6 +30,8 @@ public class Movement {
         int remainingStepsToEnd = boardGame.length - 1 - currentIndex;
 
         if (steps > remainingStepsToEnd) {
+
+            System.out.println("Stone " + stone + " cannot move " + steps + " steps. Only " + remainingStepsToEnd + " steps remaining to reach the last index.");
             if(steps==24||steps==10) {
                 System.out.println("you Have khal choose 1 for extra step choose 2 for insert new stone ");
                 int num = input.nextInt();
@@ -39,7 +41,6 @@ public class Movement {
                     BoardGame.insertStone(boardGame, 1);
                 }
             }
-            System.out.println("Stone " + stone + " cannot move " + steps + " steps. Only " + remainingStepsToEnd + " steps remaining to reach the last index.");
             System.out.println("press 1 to  choose another stone to move or 2 to throw again");
             int num1 = input.nextInt();
             if (num1 == 1) {
@@ -67,10 +68,10 @@ public class Movement {
         // Add the stone to the new index
         if (boardGame[newIndex] =="") {
             boardGame[newIndex] = stone;
-            System.out.println("hellllo");
+//            System.out.println("hellllo");
         } else {
             boardGame[newIndex] += " " + stone;
-            System.out.println("heelll333");
+//            System.out.println("heelll333");
         }
 
         System.out.println("Stone " + stone + " moved to index " + newIndex + ".");

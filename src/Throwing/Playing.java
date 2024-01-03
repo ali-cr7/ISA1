@@ -28,11 +28,11 @@ public class Playing {
     public static boolean checkIsEmpty(BoardGame boardGame) {
         for (int i = 0; i < boardGame.boardGame.length; i++) {
             if  (boardGame.boardGame[i].contains("H")) {
-                System.out.println("The board is not empty.");
+//                System.out.println("The board is not empty.");
                 return false;
             }
         }
-        System.out.println("The board is empty.");
+//        System.out.println("The board is empty.");
         return true;
     }
 
@@ -74,67 +74,7 @@ public class Playing {
         }
     }
 
-//    public  void playHuman(BoardGame boardGame){
-//        while (Movement.checkWinState(boardGame.boardGame)==false) {
-//            System.out.println("//////////////");
-//            boardGame.printBoardGame(boardGame.boardGame);
-//            System.out.println("//////////////");
-//            int sum = 0;
-//            int numberOfSteps = 0;
-//            score =5;
-//            System.out.println(score);
-//            if (checkIsEmpty(boardGame) == true) {
-//                System.out.println("is empty");
-//                if (score == 2 || score == 3 || score == 4) {
-//                    System.out.println("is empty1");
-//                    System.out.println("Computer turn");
-//
-//                    return;
-//                }
-//                if (score == 5 || score == 1) {
-//                    System.out.println("is empty2");
-//                    BoardGame.insertStone(boardGame.boardGame, 1);
-//                    playHuman(boardGame);
-//                }
-//                if (score == 6 || score == 0) {
-//                    System.out.println("is empty3");
-//                    playHuman(boardGame);
-//                }
-//            }
-//            else if(checkIsEmpty(boardGame) == false) {
-//                System.out.println("isn't empty");
-//                numberOfSteps = numberOfMoves(score);
-//                sum+= numberOfSteps;
-//                if (score == 2 || score == 3 || score == 4) {
-//                    System.out.println("isn't empty1");
-//                    Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
-//                    System.out.println("computer turn");
-//
-////                    return;
-//                }
-//                if (score == 5 || score == 1) {
-//                    System.out.println("isn't empty2");
-//                    System.out.println("you Have khal choose 1 for extra step choose 2 for insert new stone ");
-//                    int num = input.nextInt();
-//                    if (num == 1) {
-//                        Movement.chooseStoneToMove(boardGame.boardGame, 1);
-//                    } else if (num == 2) {
-//                        BoardGame.insertStone(boardGame.boardGame, 1);
-//                    }
-//                    Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
-//
-//                    playHuman(boardGame);
-//                }
-//                if (score == 6 || score == 0) {
-//                    System.out.println("isn't empty3");
-//                    Movement.chooseStoneToMove(boardGame.boardGame, score);
-//                    playHuman(boardGame);
-//                }
-//            }
-//        }
-//        System.out.println("you are the winner");
-//
-//    }
+
 
    public void playHuman(BoardGame boardGame){
         while (Movement.checkWinState(boardGame.boardGame) == false) {
@@ -145,37 +85,37 @@ public class Playing {
 
                 int sum = 0;
                 int numberOfSteps = 0;
-                score = throwStones();
-                System.out.println(score);
+                score =throwStones() ;
+                System.out.println("number of steps:"+score);
                 if (checkIsEmpty(boardGame) == true) {
-                    System.out.println("is empty");
+
                     if (score == 2 || score == 3 || score == 4) {
-                        System.out.println("is empty1");
+
                         System.out.println("Computer turn");
                         break;
                     }
                  else  if (score == 5 || score == 1) {
-                        System.out.println("is empty2");
+
                         BoardGame.insertStone(boardGame.boardGame, 1);
                         break;
                     }
                     else if (score == 6 || score == 0) {
-                        System.out.println("is empty3");
+
                         break;
                     }
 
                 } else if(checkIsEmpty(boardGame) == false) {
-                    System.out.println("isn't empty");
-                    numberOfSteps = numberOfMoves(score);
-                    sum += numberOfSteps;
+
+//                    numberOfSteps = numberOfMoves(score);
+//                    sum += numberOfSteps;
                     if (score == 2 || score == 3 || score == 4) {
-                        System.out.println("isn't empty1");
+
                         Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
                         System.out.println("computer turn");
                         break;
                     }
                    else if (score == 5 || score == 1) {
-                        System.out.println("isn't empty2");
+
                         Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
                         System.out.println("you Have khal choose 1 for extra step choose 2 for insert new stone ");
                         int num = input.nextInt();
@@ -184,10 +124,10 @@ public class Playing {
                         } else if (num == 2) {
                             BoardGame.insertStone(boardGame.boardGame, 1);
                         }
-                        Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
+
                     }
                    else if (score == 6 || score == 0) {
-                        System.out.println("isn't empty3");
+
                         Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
                     }
                 }

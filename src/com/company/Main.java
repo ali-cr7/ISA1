@@ -32,7 +32,7 @@ public class Main {
 
 
 //        while (Movement.checkWinState(boardGame.boardGame) ==false) {
-           boardGame.printBoardGame(boardGame.boardGame);
+//           boardGame.printBoardGame(boardGame.boardGame);
             playing.playHuman(boardGame);
 //            score= playing.throwStones();
 //        System.out.println(score);

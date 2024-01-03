@@ -91,7 +91,7 @@ public class BoardGame {
         // Insert the first available stone into the board game
         if (boardGame[index] == "") {
             boardGame[index] = playerStones[0];
-            System.out.println("adff");
+
         } else {
             boardGame[index] += " "+playerStones[0];
         }
