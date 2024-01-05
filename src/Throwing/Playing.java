@@ -35,6 +35,16 @@ public class Playing {
 //        System.out.println("The board is empty.");
         return true;
     }
+    public static boolean checkIsEmpty2(BoardGame boardGame) {
+        for (int i = 0; i < boardGame.aiBoard.length; i++) {
+            if  (boardGame.aiBoard[i].contains("B")) {
+//                System.out.println("The board is not empty.");
+                return false;
+            }
+        }
+//        System.out.println("The board is empty.");
+        return true;
+    }
 
     private void addScore(int number){// Change the return type to void
         score += number; // Update the score field
@@ -92,7 +102,8 @@ public class Playing {
                     if (score == 2 || score == 3 || score == 4) {
 
                         System.out.println("Computer turn");
-                        break;
+                        playAi(boardGame);
+                       return;
                     }
                  else  if (score == 5 || score == 1) {
 
@@ -112,7 +123,8 @@ public class Playing {
 
                         Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
                         System.out.println("computer turn");
-                        break;
+                        playAi(boardGame);
+                        return;
                     }
                    else if (score == 5 || score == 1) {
 
@@ -135,8 +147,69 @@ public class Playing {
         }
         System.out.println("you are the winner");
     }
+    public  void playAi (BoardGame boardGame) {
+    while (Movement.checkWinState(boardGame.boardGame) == false) {
+        do {
+            System.out.println("//////////////");
+            boardGame.printBoardGame(boardGame.boardGame);
+            System.out.println("//////////////");
+
+            int sum = 0;
+            int numberOfSteps = 0;
+            score =throwStones() ;
+            System.out.println("number of steps:"+score);
+            if (checkIsEmpty2(boardGame) == true) {
+
+                if (score == 2 || score == 3 || score == 4) {
+
+                    System.out.println("human turn");
+                    playHuman(boardGame);
+                    return;
+
+                }
+                else  if (score == 5 || score == 1) {
+
+                    BoardGame.insertStone2(boardGame.aiBoard, 1);
+                    break;
+                }
+                else if (score == 6 || score == 0) {
+
+                    break;
+                }
+
+            } else if(checkIsEmpty2(boardGame) == false) {
+
+//                    numberOfSteps = numberOfMoves(score);
+//                    sum += numberOfSteps;
+                if (score == 2 || score == 3 || score == 4) {
+
+                    Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
+                    System.out.println("human turn");
+                    playHuman(boardGame);
+                  return;
+                }
+                else if (score == 5 || score == 1) {
+
+                    Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
+                    System.out.println("you Have khal choose 1 for extra step choose 2 for insert new stone ");
+                    int num = input.nextInt();
+                    if (num == 1) {
+                        Movement.chooseStoneToMove2(boardGame.aiBoard, 1);
+                    } else if (num == 2) {
+                        BoardGame.insertStone2(boardGame.aiBoard, 1);
+                    }
+
+                }
+                else if (score == 6 || score == 0) {
+
+                    Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
+                }
+            }
+        } while (Movement.checkWinState(boardGame.boardGame) == false);
+    }
 
 
+}
 
 }
 
