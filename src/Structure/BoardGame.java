@@ -1,4 +1,5 @@
 package Structure;
+import java.util.Arrays;
 import java.util.Scanner;
 public class BoardGame {
 
@@ -21,6 +22,9 @@ public class BoardGame {
 
             if (i == 11) {
                 boardGame[i] = "P";
+            }
+            if (i == 8) {
+                boardGame[i] = "H1";
             }
             else if (i == 22) {
                 boardGame[i] = "P";
@@ -70,6 +74,9 @@ public class BoardGame {
             else if (i == 39) {
                 aiBoard[i] = "P";
             }
+            else if (i == 42) {
+                aiBoard[i] = "B1";
+            }
             else if (i == 45) {
                 aiBoard[i] = "P";
             }
@@ -83,6 +90,7 @@ public class BoardGame {
             else if (i == 73) {
                 aiBoard[i] = "P";
             }
+
             else if (i == 84) {
                 aiBoard[i] = "G";
             }
@@ -99,11 +107,7 @@ public class BoardGame {
     
 
 
-//    public void printBoardGame (String[] boardGame){
-//        for(int i=1;i<numberOfSquares;i++){
-//            System.out.println("Number Of Square:"+i+"  "+boardGame[i] +"     "+"|"+"     "+"Number Of Square:"+i+"  "+aiBoard[i]);
-//        }
-//    }
+
     public void printBoardGame (String[] boardGame){
         System.out.println("Player Board" + "\t\t\t\t" + "AI Board");
         for(int i=1; i<numberOfSquares; i++){
@@ -185,6 +189,47 @@ public class BoardGame {
         }
         return anotherArray;
     }
+    public void isKillHuman() {
+        for(int i = 8 ; i <= 42 ; i++) {
+            for(int j = 42 ; j <= 76 ; j++) {
+                if(boardGame[i].contains("H") && aiBoard[j].contains("B")&&boardGame[i]!="P"&&aiBoard[j]!="P") {
+                    System.out.println(boardGame[i] + aiBoard[j]);
+
+                    // Save the killed stone
+                    String killedStone = aiBoard[j];
+
+                    // Remove the killed stone from the board
+                    aiBoard = removeTheElement(aiBoard, j);
+
+                    // Add the killed stone back to the aiStones array
+                    aiStones = Arrays.copyOf(aiStones, aiStones.length + 1);
+                    aiStones[aiStones.length - 1] = killedStone;
+                }
+            }
+        }
+    }
+    public void isKillAi() {
+        for(int i = 8 ; i <= 42 ; i++) {
+            for(int j = 42 ; j <= 76 ; j++) {
+                if(boardGame[j].contains("H") && aiBoard[i].contains("B")&&boardGame[j]!="P"&&aiBoard[i]!="P") {
+                    System.out.println(boardGame[j] + aiBoard[i]);
+
+                    // Save the killed stone
+                    String killedStone = boardGame[j];
+
+                    // Remove the killed stone from the board
+                    boardGame = removeTheElement(boardGame, j);
+
+                    // Add the killed stone back to the playerStones array
+                    playerStones = Arrays.copyOf(playerStones, playerStones.length + 1);
+                    playerStones[playerStones.length - 1] = killedStone;
+                }
+            }
+        }
+    }
+
+
+
 }
 
 

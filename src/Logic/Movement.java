@@ -188,9 +188,11 @@ public class Movement {
 
         // Check if the last square contains all four stones
         if (lastSquare != null && lastSquare.contains("H1") && lastSquare.contains("H2") && lastSquare.contains("H3") && lastSquare.contains("H4")) {
+            System.out.println("human won");
             return true;
         }
-        else if (lastSquare != null && lastSquare.contains("B1") && lastSquare.contains("B2") && lastSquare.contains("B3") && lastSquare.contains("B4")) {
+         if (lastSquare != null && lastSquare.contains("B1") && lastSquare.contains("B2") && lastSquare.contains("B3") && lastSquare.contains("B4")) {
+            System.out.println("AI won");
             return true;
         }else {
             return false;

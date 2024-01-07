@@ -88,7 +88,7 @@ public class Playing {
 
    public void playHuman(BoardGame boardGame){
         while (Movement.checkWinState(boardGame.boardGame) == false) {
-            do {
+            {
                 System.out.println("//////////////");
                 boardGame.printBoardGame(boardGame.boardGame);
                 System.out.println("//////////////");
@@ -122,6 +122,7 @@ public class Playing {
                     if (score == 2 || score == 3 || score == 4) {
 
                         Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
+                        boardGame.isKillHuman();
                         System.out.println("computer turn");
                         playAi(boardGame);
                         return;
@@ -133,6 +134,7 @@ public class Playing {
                         int num = input.nextInt();
                         if (num == 1) {
                             Movement.chooseStoneToMove(boardGame.boardGame, 1);
+                            boardGame.isKillHuman();
                         } else if (num == 2) {
                             BoardGame.insertStone(boardGame.boardGame, 1);
                         }
@@ -141,15 +143,17 @@ public class Playing {
                    else if (score == 6 || score == 0) {
 
                         Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
+                        boardGame.isKillHuman();
                     }
                 }
-            } while (Movement.checkWinState(boardGame.boardGame) == false);
+            }
+            return;
         }
-        System.out.println("you are the winner");
+       System.out.println("humnan won");
     }
     public  void playAi (BoardGame boardGame) {
-    while (Movement.checkWinState(boardGame.boardGame) == false) {
-        do {
+    while (Movement.checkWinState(boardGame.aiBoard) == false) {
+         {
             System.out.println("//////////////");
             boardGame.printBoardGame(boardGame.boardGame);
             System.out.println("//////////////");
@@ -184,6 +188,7 @@ public class Playing {
                 if (score == 2 || score == 3 || score == 4) {
 
                     Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
+                    boardGame.isKillAi();
                     System.out.println("human turn");
                     playHuman(boardGame);
                   return;
@@ -195,6 +200,7 @@ public class Playing {
                     int num = input.nextInt();
                     if (num == 1) {
                         Movement.chooseStoneToMove2(boardGame.aiBoard, 1);
+                        boardGame.isKillAi();
                     } else if (num == 2) {
                         BoardGame.insertStone2(boardGame.aiBoard, 1);
                     }
@@ -203,9 +209,13 @@ public class Playing {
                 else if (score == 6 || score == 0) {
 
                     Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
+                    boardGame.isKillAi();
+
                 }
             }
-        } while (Movement.checkWinState(boardGame.boardGame) == false);
+        }
+        System.out.println("ai win");
+        return;
     }
 
 
