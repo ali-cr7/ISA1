@@ -95,7 +95,7 @@ public class Playing {
 
                 int sum = 0;
                 int numberOfSteps = 0;
-                score =throwStones() ;
+                score =2 ;
                 System.out.println("number of steps:"+score);
                 if (checkIsEmpty(boardGame) == true) {
 
@@ -147,9 +147,9 @@ public class Playing {
                     }
                 }
             }
-            return;
+//            return;
         }
-       System.out.println("humnan won");
+//       System.out.println("humnan won");
     }
     public  void playAi (BoardGame boardGame) {
     while (Movement.checkWinState(boardGame.aiBoard) == false) {
@@ -214,8 +214,8 @@ public class Playing {
                 }
             }
         }
-        System.out.println("ai win");
-        return;
+//        System.out.println("ai win");
+//        return;
     }
 
 

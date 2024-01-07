@@ -23,7 +23,7 @@ public class BoardGame {
             if (i == 11) {
                 boardGame[i] = "P";
             }
-            if (i == 8) {
+            if (i == 6) {
                 boardGame[i] = "H1";
             }
             else if (i == 22) {
@@ -75,8 +75,11 @@ public class BoardGame {
                 aiBoard[i] = "P";
             }
             else if (i == 42) {
-                aiBoard[i] = "B1";
+                aiBoard[i] = "B4";
             }
+//            else if (i == 43) {
+//                aiBoard[i] = "B3";
+//            }
             else if (i == 45) {
                 aiBoard[i] = "P";
             }
@@ -199,7 +202,7 @@ public class BoardGame {
                     String killedStone = aiBoard[j];
 
                     // Remove the killed stone from the board
-                    aiBoard = removeTheElement(aiBoard, j);
+                    aiBoard[j] =" ";
 
                     // Add the killed stone back to the aiStones array
                     aiStones = Arrays.copyOf(aiStones, aiStones.length + 1);
@@ -218,8 +221,8 @@ public class BoardGame {
                     String killedStone = boardGame[j];
 
                     // Remove the killed stone from the board
-                    boardGame = removeTheElement(boardGame, j);
-
+//                    boardGame = removeTheElement(boardGame, j);
+                            boardGame[j]=" ";
                     // Add the killed stone back to the playerStones array
                     playerStones = Arrays.copyOf(playerStones, playerStones.length + 1);
                     playerStones[playerStones.length - 1] = killedStone;
