@@ -4,6 +4,7 @@ import Logic.Movement;
 import Structure.BoardGame;
 import Throwing.Playing;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,12 +12,9 @@ public class Main {
     public static void main(String[] args) {
 
         BoardGame boardGame = new BoardGame();
-        Movement movement= new Movement();
+        Movement movement = new Movement();
         Playing playing = new Playing();
-while (Movement.checkWinState(boardGame.boardGame)!=true) {
-    playing.playHuman(boardGame);
-}
 
+        movement.getNextOptions(boardGame, 2);
 
-    }
-}
+    }}
