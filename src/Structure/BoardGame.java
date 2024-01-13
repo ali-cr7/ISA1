@@ -8,6 +8,8 @@ public class BoardGame {
     public  String []boardGame =new String[numberOfSquares];
     public static String[] playerStones = {"H1", "H2", "H3", "H4"};
     public  static  boolean isEmpty= false;
+    public int killedStonesCount = 0; // Add this line
+    public  int stonesNumbers = 0;
     public  static  boolean isEmpty2= false;
     public BoardGame(){
 
@@ -23,7 +25,7 @@ public class BoardGame {
                 aiBoard[i] = "P";
             }
             else if (i == 23) {
-                aiBoard[i] = "B1 B2 B3 B4";
+                aiBoard[i] = "B1";
             }
 
             else if (i == 28) {
@@ -61,6 +63,12 @@ public class BoardGame {
         }
     }
 
+    public BoardGame(int numberOfSquares, String[] aiBoard, String[] boardGame) {
+        this.numberOfSquares = numberOfSquares;
+        this.aiBoard = aiBoard;
+        this.boardGame = boardGame;
+    }
+
     {
         for(int i=0;i<numberOfSquares;i++) {
 
@@ -93,6 +101,9 @@ public class BoardGame {
             else if (i == 62) {
                 boardGame[i] = "P";
             }
+            else if (i == 66) {
+                boardGame[i] = "H2";
+            }
             else if (i == 73) {
                 boardGame[i] = "P";
             }
@@ -110,14 +121,17 @@ public class BoardGame {
             if ( i == 22 || i == 28 || i == 39 || i == 45 || i == 56  || i == 73) {
                 aiBoard[i] = "P";
             } else if (i == 11) {
-                aiBoard[i] = "P B1";
+                aiBoard[i] = "P";
             }
             else if (i == 62) {
-                aiBoard[i] = "P B3";
+                aiBoard[i] = "P";
             }
-            else if (i == 33) {
-                aiBoard[i] = "B2";
-            }
+//            else if (i == 12) {
+//                aiBoard[i] = "B3";
+//            }
+//            else if (i == 33) {
+//                aiBoard[i] = "B2";
+//            }
             else if (i == 21) {
                 aiBoard[i] = "B4";
             }
@@ -134,6 +148,14 @@ public class BoardGame {
         System.arraycopy(gameModel.aiBoard, 0, copiedAiBoard, 0, numberOfSquares);
         String[] copiedHumanBoard = new String[numberOfSquares];
         System.arraycopy(gameModel.boardGame, 0, copiedHumanBoard, 0, numberOfSquares);
+        String[] copiedPlayerStones = new String[playerStones.length];
+        System.arraycopy(gameModel.playerStones, 0, copiedPlayerStones,0,playerStones.length);
+        String[] copiedAiStones = new String[aiStones.length];
+        System.arraycopy(gameModel.aiStones, 0, copiedAiStones,0,aiStones.length);
+
+        this.killedStonesCount = gameModel.killedStonesCount;
+        this.stonesNumbers= gameModel.stonesNumbers;
+
 }
     public void printBoard (BoardGame boardGame){
         System.out.println("AI Board" + "\t" + "Player Board");
@@ -170,10 +192,10 @@ public class BoardGame {
         if (playerStones.length==0)
             isEmpty=true;
     }
-    public static void insertStone2(String[] boardGame, int index) {
+    public static void insertStone2( String [] boardGame, int index) {
         // Check if there are any stones left
-        if (aiStones.length == 0) {
-            System.out.println("No more stones left to insert.");
+        if (boardGame.length == 0) {
+//            System.out.println("No more stones left to insert.");
             return;
         }
 
@@ -186,13 +208,13 @@ public class BoardGame {
         }
 
         // Remove the inserted stone from the playerStones array
-        aiStones = removeTheElement(aiStones, 0);
+       aiStones = removeTheElement(aiStones, 0);
 
         // Print the remaining stones
-        System.out.println("Remaining stones:");
-        for (String stone : aiStones) {
-            System.out.println(stone);
-        }
+//        System.out.println("Remaining stones:");
+//        for (String stone : aiStones) {
+//            System.out.println(stone);
+//        }
         if (aiStones.length==0)
             isEmpty2=true;
     }
@@ -230,42 +252,6 @@ public class BoardGame {
             }
         }
     }
-    public void isKillAi() {
-                for(int i = 8 ; i <= 42 ; i++) {
-                for(int j = 42 ; j <= 76 ; j++) {
-                if(boardGame[j].contains("H1") ) {
-                    System.out.println(boardGame[j] + aiBoard[i]);
 
-                    // Save the killed stone
-                    String killedStone = boardGame[j];
 
-                    // Remove the killed stone from the board
-//                    boardGame = removeTheElement(boardGame, j);
-                            boardGame[j]=" ";
-                    // Add the killed stone back to the playerStones array
-                    playerStones = Arrays.copyOf(playerStones, playerStones.length + 1);
-                    playerStones[playerStones.length - 1] = killedStone;
-                }
-            }
-        }
-    }
-    public void isKillAi1() {
-        for(int i = 8 ; i <= 42 ; i++) {
-            int j = i + 34; // This ensures that when i is 8, j is 42, and so on.
-            if(j <= 76 && boardGame[j].contains("H1")) {
-                System.out.println(boardGame[j]+" "+ i+ " " +j);
-
-                // Save the killed stone
-                String killedStone = boardGame[j];
-
-                // Remove the killed stone from the board
-                boardGame[j]=" ";
-
-                // Add the killed stone back to the playerStones array
-                playerStones = Arrays.copyOf(playerStones, playerStones.length + 1);
-                playerStones[playerStones.length - 1] = killedStone;
-            }
-        }
-
-    }
 }

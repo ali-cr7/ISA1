@@ -1,38 +1,19 @@
-/////*
-//// * Copyright (C) 2017  Danijel Askov
-//// *
-//// * This file is part of Expectiminimax Backgammon.
-//// *
-//// * Expectiminimax Backgammon is free software: you can redistribute it and/or modify
-//// * it under the terms of the GNU General Public License as published by
-//// * the Free Software Foundation, either version 3 of the License, or
-//// * (at your option) any later version.
-//// *
-//// * Expectiminimax Backgammon is distributed in the hope that it will be useful,
-//// * but WITHOUT ANY WARRANTY; without even the implied warranty of
-//// * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//// * GNU General Public License for more details.
-//// *
-//// * You should have received a copy of the GNU General Public License
-//// * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-//
-//
-//package Throwing;
-//
-//
-//import Logic.Movement;
-//import Structure.BoardGame;
-//import Structure.State;
-//
-//import java.time.Duration;
-//import java.time.Instant;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//
-//public class ExpectiminimaxPlayer   {
-//    Movement movement ;
-//
+package Throwing;
+
+import Logic.Movement;
+import Structure.BoardGame;
+import Structure.State;
+
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ExpectiminimaxPlayer   {
+    Movement movement ;
+
+
 //    public float expectiminimax(BoardGame node, int depth) {
 //        if (Movement.checkWinState(node) || depth == 0)
 //            return heuristicValue(node);
@@ -57,19 +38,27 @@
 //        }
 //        return 0;  // Default return value
 //    }
-////
-////
-////
 //
-////
-////
-//    private float probability(BoardGame child) {
-//        return 0;
-//    }
-////
-//    private int heuristicValue(BoardGame node) {
-//        return 0;
-//    }
-////
-////
-//}
+//
+//
+
+//
+//
+    private float probability(BoardGame child) {
+        return 0;
+    }
+//
+    public int heuristicValue(BoardGame node) {
+        return node.killedStonesCount;
+
+
+    }
+    public int numberOfStones(BoardGame child) {
+        int stonesRemaining =4- child.playerStones.length ;
+        return stonesRemaining;
+    }
+
+
+//
+//
+}

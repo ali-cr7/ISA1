@@ -1,16 +1,19 @@
 package Logic;
 import Structure.BoardGame;
 import Structure.Positions;
+import Throwing.ExpectiminimaxPlayer;
 import Throwing.Playing;
 
 import java.util.*;
 
 public class Movement {
     private static Scanner input=new Scanner(System.in);
+    public  static boolean isKilled =false;
     BoardGame boardGame = new BoardGame();
-    private int numberOfStonesRemaining = 4; // Assuming each player starts with 4 stones
-    private int Position = -1; // Initialize H position outside the loop
-    public static void moveStone(String[] boardGame, String stone, int steps) {
+    ExpectiminimaxPlayer expectiminimaxPlayer = new ExpectiminimaxPlayer();
+           private int numberOfStonesRemaining = 4; // Assuming each player starts with 4 stones
+           private int Position = -1; // Initialize H position outside the loop
+           public static void moveStone(String[] boardGame, String stone, int steps) {
         // Find the current index of the stone
         int currentIndex = -1;
         for (int i = 0; i < boardGame.length; i++) {
@@ -34,7 +37,7 @@ public class Movement {
                 if (num == 1) {
                     Movement.chooseStoneToMove(boardGame, 1);
                 } else if (num == 2) {
-                    BoardGame.insertStone(boardGame, 1);
+//                    boardGame.insertStone(boardGame, 1);
                 }
             }
             System.out.println("press 1 to  choose another stone to move or 2 to throw again");
@@ -68,7 +71,7 @@ public class Movement {
         System.out.println("Stone " + stone + " moved to index " + newIndex + ".");
     }
 
-    public static void chooseStoneToMove(String[] boardGame, int steps) {
+           public static void chooseStoneToMove(String[] boardGame, int steps) {
         Scanner scanner = new Scanner(System.in);
 
         // Display the "H" stones in the board game
@@ -88,7 +91,7 @@ public class Movement {
 
     }
 
-        public boolean canMoveStone(BoardGame boardGame, String stone, int steps) {
+            public boolean canMoveStone(BoardGame boardGame, String stone, int steps) {
             boolean hasBStone = false;
 
             for (String square : boardGame.aiBoard) {
@@ -98,7 +101,7 @@ public class Movement {
                 }
             }
             if (!hasBStone) {
-                System.out.println("No B stones found in the board game.");
+
                 return false;
             }
 
@@ -136,9 +139,8 @@ public class Movement {
         }
 
             public  void moveStone3(BoardGame boardGame,String stone, int steps){
-    int currentIndex = -1;
-
-    for (int i = 0; i < boardGame.aiBoard.length; i++) {
+                int currentIndex = -1;
+          for (int i = 0; i < boardGame.aiBoard.length; i++) {
         if (boardGame.aiBoard[i] != null && boardGame.aiBoard[i].contains(stone)) {
             currentIndex = i;
             break;
@@ -162,54 +164,58 @@ public class Movement {
         boardGame.aiBoard[newIndex] += " " + stone;
     }
     System.out.println("Stone " + stone + " moved to index " + newIndex + ".");
+                // Add this line at the beginning
                 if(newIndex <= 42) {
                     int correspondingIndex = newIndex +34;
-                    System.out.println(newIndex);
-                    System.out.println(correspondingIndex);
+//                    System.out.println(newIndex);
+//                    System.out.println(correspondingIndex);
                     if (boardGame.boardGame[correspondingIndex].contains("H")) {
-                        System.out.println("kill");
+
+                        isKilled= true;
+
                         // Save the killed stones
                         String killedStones = boardGame.boardGame[correspondingIndex];
                         String[] stones = killedStones.split(" ");
-
+                        // Increment the counter by the number of killed stones
+                       boardGame.killedStonesCount += stones.length; // Add this line
                         // Remove the killed stones from the board
                         boardGame.boardGame[correspondingIndex]=" ";
-
                         // Add the killed stones back to the playerStones array
                         for(String stone1 : stones){
                             boardGame.playerStones = Arrays.copyOf(boardGame.playerStones, boardGame.playerStones.length + 1);
                             boardGame.playerStones[boardGame.playerStones.length - 1] = stone1;
                         }
-                        System.out.println(boardGame.playerStones.length);
                     }
                 }
-
-
                 if(newIndex > 42){
                     int correspondingIndex = newIndex-34;
-                    System.out.println(newIndex);
-                    System.out.println(correspondingIndex);
+//                    System.out.println(newIndex);
+//                    System.out.println(correspondingIndex);
                     if (boardGame.boardGame[correspondingIndex].contains("H")) {
-                        System.out.println("kill");
+
+                        isKilled= true;
+
                         // Save the killed stones
                         String killedStones = boardGame.boardGame[correspondingIndex];
                         String[] stones = killedStones.split(" ");
-
+                        // Increment the counter by the number of killed stones
+                       boardGame.killedStonesCount += stones.length; // Add this line
                         // Remove the killed stones from the board
                         boardGame.boardGame[correspondingIndex]=" ";
-
                         // Add the killed stones back to the playerStones array
                         for(String stone1 : stones){
                             boardGame.playerStones = Arrays.copyOf(boardGame.playerStones, boardGame.playerStones.length + 1);
                             boardGame.playerStones[boardGame.playerStones.length - 1] = stone1;
                         }
-                        System.out.println(boardGame.playerStones.length);
                     }
                 }
 
+             //   System.out.println("Number of stones killed: " + boardGame.killedStonesCount); // Print the total number of stones killed
 
-}
-    public HashSet<Positions> checkMove(BoardGame g, int steps ) {
+
+
+            }
+            public HashSet<Positions> checkMove(BoardGame g, int steps ) {
         HashSet<Positions> moves = new HashSet<>();
 
         // Iterate over all AI stones
@@ -234,50 +240,71 @@ public class Movement {
         return moves;
     }
 
-        public List<BoardGame> getNextOptions(BoardGame s, int steps) {
-            List<BoardGame> next = new LinkedList<>();
-            String[] aiStones = {"B1", "B2", "B3", "B4"};
+    public List<BoardGame> getNextOptions(BoardGame s, int steps) {
+        List<BoardGame> next = new LinkedList<>();
+        String[] aiStones = {"B4", "B3", "B2", "B1"};
 
-            if (steps == 10 || steps == 25) {
-                // Option 1: Extra step for all existing stones, without adding a new stone
-                for (String currentStone : aiStones) {
-                    BoardGame copy = new BoardGame(s);
-                    if (canMoveStone(copy, currentStone, steps + 1)) {
-                        moveStone3(copy, currentStone, steps + 1);
-                        next.add(copy);
-                        boardGame.printBoard(copy);
-                    }
-                }
-
-                // Option 2: Add a new stone without taking an extra step
-                BoardGame copy2 = new BoardGame(s);
-                BoardGame.insertStone2(copy2.aiBoard,1);
-
-                // Consider all possible moves for the new stone and all existing stones
-                for (String currentStone : aiStones) {
-
-                    if (canMoveStone(copy2, currentStone, steps)) {
-                        moveStone3(copy2, currentStone, steps);
-                        next.add(copy2);
-                        boardGame.printBoard(copy2);
-                    }
-                }
-            } else {
-                // Normal moves for all existing stones
-                for (String currentStone : aiStones) {
-                    BoardGame copy = new BoardGame(s);
-                    if (canMoveStone(copy, currentStone, steps)) {
-                        moveStone3(copy, currentStone, steps);
-                        next.add(copy);
-                        boardGame.printBoard(copy);
-                    }
+        if (steps == 10 || steps == 25) {
+            // For each existing stone, consider the option of taking an extra step without adding a new stone
+            for (String currentStone : aiStones) {
+                BoardGame copy = new BoardGame(s);
+                if (canMoveStone(copy, currentStone, steps + 1)) {
+                    moveStone3(copy, currentStone, steps + 1);
+                   // System.out.println("Heuristic value for stone " + currentStone + " after an extra step: " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone after an extra step
+                    boardGame.printBoard(copy);
+                    next.add(copy);
                 }
             }
-            System.out.println(next.size());
-            return next;
-        }
 
-        public static boolean checkWinState(BoardGame g) {
+            // Create a copy of the board with a new stone added
+            BoardGame copyWithNewStone = new BoardGame(s);
+            BoardGame.insertStone2(copyWithNewStone.aiBoard, 1); // Add a new stone to the board, for example at position 1
+
+//
+
+            for (String currentStone : aiStones) {
+                BoardGame copy=  deepCopyBoardGame(copyWithNewStone);
+                if (canMoveStone(copy, currentStone, steps)) {
+                    moveStone3(copy, currentStone, steps);
+                 //   System.out.println("Heuristic value for stone " + currentStone + " after moving with the new stone added: " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone after moving with the new stone added
+                   boardGame.printBoard(copy);
+                    next.add(copy);
+                }
+            }
+        } else {
+            // For all other steps, handle the normal moves for all existing stones
+            for (String currentStone : aiStones) {
+                BoardGame copy = new BoardGame(s);
+                if (canMoveStone(copy, currentStone, steps)) {
+                    moveStone3(copy, currentStone, steps);
+                    System.out.println("Heuristic value for stone " + currentStone + ": " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone
+                    next.add(copy);
+                }
+            }
+        }
+        System.out.println(next.size());
+        return next;
+    }
+
+    // Deep copy method
+// Deep copy method
+    private BoardGame deepCopyBoardGame(BoardGame original) {
+        String[] copiedAiBoard = Arrays.copyOf(original.aiBoard, original.aiBoard.length);
+        String[] copiedHumanBoard = Arrays.copyOf(original.boardGame, original.boardGame.length);
+        String[] copiedPlayerStones = Arrays.copyOf(original.playerStones, original.playerStones.length);
+        String[] copiedAiStones = Arrays.copyOf(original.aiStones, original.aiStones.length);
+
+        // Perform deep copy of mutable fields if needed
+        // For example, if there are mutable objects within the BoardGame class, you should create copies of them as well
+
+        BoardGame copy = new BoardGame(original.boardGame.length,copiedAiBoard,copiedHumanBoard);
+        return copy;
+    }
+
+
+
+
+    public static boolean checkWinState(BoardGame g) {
         // Get the string at the last index of the board game array
         String lastSquare =g.boardGame[g.boardGame.length - 1];
 

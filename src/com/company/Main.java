@@ -15,6 +15,6 @@ public class Main {
         Movement movement = new Movement();
         Playing playing = new Playing();
 
-        movement.getNextOptions(boardGame, 2);
+        movement.getNextOptions(boardGame, 25);
 
     }}

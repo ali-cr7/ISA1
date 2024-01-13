@@ -83,7 +83,7 @@ public class Playing {
 //        while (Movement.checkWinState(boardGame.boardGame) == false) {
 //            {
 //                System.out.println("//////////////");
-//                boardGame.printBoardGame(boardGame.boardGame);
+//                boardGame.printBoard(boardGame);
 //                System.out.println("//////////////");
 //
 //                int sum = 0;
@@ -95,7 +95,7 @@ public class Playing {
 //                    if (score == 2 || score == 3 || score == 4) {
 //
 //                        System.out.println("Computer turn");
-//                        playAi(boardGame);
+////                        playAi(boardGame);
 //                       return;
 //                    }
 //                 else  if (score == 5 || score == 1) {
@@ -117,7 +117,7 @@ public class Playing {
 //                        Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
 //                        boardGame.isKillHuman();
 //                        System.out.println("computer turn");
-//                        playAi(boardGame);
+////                        playAi(boardGame);
 //                        return;
 //                    }
 //                   else if (score == 5 || score == 1) {
@@ -127,7 +127,7 @@ public class Playing {
 //                        int num = input.nextInt();
 //                        if (num == 1) {
 //                            Movement.chooseStoneToMove(boardGame.boardGame, 1);
-//                            boardGame.isKillHuman();
+////                            boardGame.isKillHuman();
 //                        } else if (num == 2) {
 //                            BoardGame.insertStone(boardGame.boardGame, 1);
 //                        }
@@ -144,75 +144,7 @@ public class Playing {
 //        }
 ////       System.out.println("humnan won");
 //    }
-//    public  void playAi (BoardGame boardGame) {
-//    while (Movement.checkWinState(boardGame.aiBoard) == false) {
-//         {
-//            System.out.println("//////////////");
-//            boardGame.printBoardGame(boardGame.boardGame);
-//            System.out.println("//////////////");
-//
-//            int sum = 0;
-//            int numberOfSteps = 0;
-//            score =throwStones() ;
-//            System.out.println("number of steps:"+score);
-//            if (checkIsEmpty2(boardGame) == true) {
-//
-//                if (score == 2 || score == 3 || score == 4) {
-//
-//                    System.out.println("human turn");
-//                    playHuman(boardGame);
-//                    return;
-//
-//                }
-//                else  if (score == 5 || score == 1) {
-//
-//                    BoardGame.insertStone2(boardGame.aiBoard, 1);
-//                    break;
-//                }
-//                else if (score == 6 || score == 0) {
-//
-//                    break;
-//                }
-//
-//            } else if(checkIsEmpty2(boardGame) == false) {
-//
-////                    numberOfSteps = numberOfMoves(score);
-////                    sum += numberOfSteps;
-//                if (score == 2 || score == 3 || score == 4) {
-//
-//                    Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
-//                    boardGame.isKillAi();
-//                    System.out.println("human turn");
-//                    playHuman(boardGame);
-//                  return;
-//                }
-//                else if (score == 5 || score == 1) {
-//
-//                    Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
-//                    System.out.println("you Have khal choose 1 for extra step choose 2 for insert new stone ");
-//                    int num = input.nextInt();
-//                    if (num == 1) {
-//                        Movement.chooseStoneToMove2(boardGame.aiBoard, 1);
-//                        boardGame.isKillAi();
-//                    } else if (num == 2) {
-//                        BoardGame.insertStone2(boardGame.aiBoard, 1);
-//                    }
-//
-//                }
-//                else if (score == 6 || score == 0) {
-//
-//                    Movement.chooseStoneToMove2(boardGame.aiBoard, numberOfMoves(score));
-//                    boardGame.isKillAi();
-//
-//                }
-//            }
-//        }
-////        System.out.println("ai win");
-////        return;
-//    }
-//
-//
-//}
+
 }
 
 
