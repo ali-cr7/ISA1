@@ -79,71 +79,75 @@ public class Playing {
         score += number; // Update the score field
     }
 
-//   public void playHuman(BoardGame boardGame){
-//        while (Movement.checkWinState(boardGame.boardGame) == false) {
-//            {
-//                System.out.println("//////////////");
-//                boardGame.printBoard(boardGame);
-//                System.out.println("//////////////");
-//
-//                int sum = 0;
-//                int numberOfSteps = 0;
-//                score =2 ;
-//                System.out.println("number of steps:"+score);
-//                if (checkIsEmpty(boardGame) == true) {
-//
-//                    if (score == 2 || score == 3 || score == 4) {
-//
-//                        System.out.println("Computer turn");
-////                        playAi(boardGame);
-//                       return;
-//                    }
-//                 else  if (score == 5 || score == 1) {
-//
-//                        BoardGame.insertStone(boardGame.boardGame, 1);
-//                        break;
-//                    }
-//                    else if (score == 6 || score == 0) {
-//
-//                        break;
-//                    }
-//
-//                } else if(checkIsEmpty(boardGame) == false) {
-//
-////                    numberOfSteps = numberOfMoves(score);
-////                    sum += numberOfSteps;
-//                    if (score == 2 || score == 3 || score == 4) {
-//
-//                        Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
-//                        boardGame.isKillHuman();
-//                        System.out.println("computer turn");
-////                        playAi(boardGame);
-//                        return;
-//                    }
-//                   else if (score == 5 || score == 1) {
-//
-//                        Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
-//                        System.out.println("you Have khal choose 1 for extra step choose 2 for insert new stone ");
-//                        int num = input.nextInt();
-//                        if (num == 1) {
-//                            Movement.chooseStoneToMove(boardGame.boardGame, 1);
-////                            boardGame.isKillHuman();
-//                        } else if (num == 2) {
-//                            BoardGame.insertStone(boardGame.boardGame, 1);
-//                        }
-//
-//                    }
-//                   else if (score == 6 || score == 0) {
-//
-//                        Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
-//                        boardGame.isKillHuman();
-//                    }
-//                }
-//            }
-////            return;
-//        }
-////       System.out.println("humnan won");
-//    }
+   public void playHuman(BoardGame boardGame){
+        int counter = 0;
+       while (Movement.checkWinState(boardGame) == false && counter < 10) {
+           counter++;
+            {
+                System.out.println("//////////////");
+                boardGame.printBoard(boardGame);
+                System.out.println("//////////////");
+
+                int sum = 0;
+                int numberOfSteps = 0;
+                score =5 ;
+                System.out.println("number of steps:"+score);
+                if (checkIsEmpty(boardGame) == true) {
+
+                    if (score == 2 || score == 3 || score == 4) {
+
+                        System.out.println("Computer turn");
+//                        playAi(boardGame);
+                     //  return;
+                    }
+                 else  if (score == 5 || score == 1) {
+
+                        boardGame.insertStone(boardGame.boardGame, 1);
+                        break;
+                    }
+                    else if (score == 6 || score == 0) {
+
+                        break;
+                    }
+
+                } else if(checkIsEmpty(boardGame) == false) {
+
+//                    numberOfSteps = numberOfMoves(score);
+//                    sum += numberOfSteps;
+                    if (score == 2 || score == 3 || score == 4) {
+
+                        Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
+                        boardGame.isKillHuman();
+                        System.out.println("computer turn");
+//                        playAi(boardGame);
+                     //   return;
+                    }
+                   else if (score == 5 || score == 1) {
+
+
+                        System.out.println("you Have khal choose 1 for extra step choose 2 for insert new stone ");
+                        int num = input.nextInt();
+                        if (num == 1) {
+                            Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score)+1);
+//                            boardGame.isKillHuman();
+                        } else if (num == 2) {
+                            boardGame.insertStone(boardGame.boardGame, 1);
+                            Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
+                        }
+
+
+                    }
+                   else if (score == 6 || score == 0) {
+
+                        Movement.chooseStoneToMove(boardGame.boardGame, numberOfMoves(score));
+                        boardGame.isKillHuman();
+                    }
+                }
+            }
+//            return;
+        }
+//       System.out.println("humnan won");
+    }
 
 }
 

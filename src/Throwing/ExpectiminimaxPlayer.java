@@ -68,19 +68,19 @@ public class ExpectiminimaxPlayer   {
         int value4=0;
 
         for(int j=0;j<node.aiBoard.length;j++){
-            if(node.aiBoard[j].equals("B1")){
+            if(node.aiBoard[j].contains("B1")){
                 B1place=j;
                 //System.out.println(B1place);
             }
-            if(node.aiBoard[j].equals("B2")){
+            if(node.aiBoard[j].contains("B2")){
                 B2place=j;
                 //System.out.println(B2place);
             }
-            if(node.aiBoard[j].equals("B3")){
+            if(node.aiBoard[j].contains("B3")){
                 B3place=j;
                 //System.out.println(B3place);
             }
-            if(node.aiBoard[j].equals("B4")){
+            if(node.aiBoard[j].contains("B4")){
                 B4place=j;
                 //System.out.println(B4place);
             }
