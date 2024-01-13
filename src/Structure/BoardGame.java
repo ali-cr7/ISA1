@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class BoardGame {
     private int numberOfSquares=85;
     public  String []aiBoard =new String[numberOfSquares];
-    public static String[] aiStones = {"B1", "B2", "B3", "B4"};
+    public  String[] aiStones = {"B1", "B2", "B3", "B4"};
     public  String []boardGame =new String[numberOfSquares];
-    public static String[] playerStones = {"H1", "H2", "H3", "H4"};
+    public  String[] playerStones = {"H1", "H2", "H3", "H4"};
     public  static  boolean isEmpty= false;
     public int killedStonesCount = 0; // Add this line
     public  int stonesNumbers = 0;
@@ -63,10 +63,14 @@ public class BoardGame {
         }
     }
 
-    public BoardGame(int numberOfSquares, String[] aiBoard, String[] boardGame) {
+    public BoardGame(int numberOfSquares, String[] aiBoard, String[] boardGame,int stonesNumbers , int killedStonesCount,String[] aiStones,String[] playerStones) {
         this.numberOfSquares = numberOfSquares;
+        this.playerStones =playerStones;
+        this.aiStones= aiStones;
         this.aiBoard = aiBoard;
         this.boardGame = boardGame;
+        this.stonesNumbers= stonesNumbers;
+                this.killedStonesCount=killedStonesCount;
     }
 
     {
@@ -121,7 +125,7 @@ public class BoardGame {
             if ( i == 22 || i == 28 || i == 39 || i == 45 || i == 56  || i == 73) {
                 aiBoard[i] = "P";
             } else if (i == 11) {
-                aiBoard[i] = "P";
+                aiBoard[i] = "P B3";
             }
             else if (i == 62) {
                 aiBoard[i] = "P";
@@ -136,7 +140,7 @@ public class BoardGame {
                 aiBoard[i] = "B4";
             }
            else if (i == 84) {
-                aiBoard[i] = "G";
+                aiBoard[i] = "G B2";
             } else {
                 aiBoard[i] ="";
             }
@@ -166,7 +170,7 @@ public class BoardGame {
         }
     }
 
-    public static void insertStone(String[] boardGame, int index) {
+    public  void insertStone(String[] boardGame, int index) {
         // Check if there are any stones left
         if (playerStones.length == 0) {
             System.out.println("No more stones left to insert.");
@@ -192,7 +196,7 @@ public class BoardGame {
         if (playerStones.length==0)
             isEmpty=true;
     }
-    public static void insertStone2( String [] boardGame, int index) {
+    public  void insertStone2( String [] boardGame, int index) {
         // Check if there are any stones left
         if (boardGame.length == 0) {
 //            System.out.println("No more stones left to insert.");
