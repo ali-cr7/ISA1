@@ -202,6 +202,10 @@ public class BoardGame {
 //            System.out.println("No more stones left to insert.");
             return;
         }
+        if (aiStones.length == 0) {
+            // System.out.println("No more aiStones left.");
+            return;
+        }
 
         // Insert the first available stone into the board game
         if (boardGame[index] == "") {

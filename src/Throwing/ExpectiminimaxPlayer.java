@@ -10,42 +10,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ExpectiminimaxPlayer   {
-    Movement movement ;
+public class ExpectiminimaxPlayer {
+    Movement movement = new Movement() ;
+Playing playing = new Playing();
+BoardGame boardGame = new BoardGame();
+
+    // Expectiminimax function
+    public float expectiminimax(BoardGame node, int depth, String player) {
+        if (depth <= 0) {
+            return heuristicValue(node);
+        }
+
+        if (Movement.checkWinState(node) || depth == 0) {
+            System.out.println("sssaa");
+            boardGame.printBoard(node);
+            System.out.println(heuristicValue(node));
+            return heuristicValue(node);
+        }
+        if (player.equals("Max")) {
+            float value = Float.NEGATIVE_INFINITY;
+            for (BoardGame child :movement.getNextOptions(node, playing.numberOfMoves(playing.throwStones()))) {
+                value = Math.max(value, expectiminimax(child, depth - 1, "Min"));
+            }
+            return value;
+        } else if (player.equals("Min")) {
+            float value = Float.POSITIVE_INFINITY;
+            for (BoardGame child : movement.getNextOptions(node,playing.numberOfMoves(playing.throwStones()))) {
+                value = Math.min(value, expectiminimax(child, depth - 1, "Chance"));
+            }
+            return value;
+        } else { // Chance node
+            float value = 0;
+            for (BoardGame child : movement.getNextOptions(node, playing.numberOfMoves(playing.throwStones()))) {
+                value += (1.0 / 6) * expectiminimax(child, depth - 1, "Max"); // Assume equal probability for each outcome of throwStones
+            }
+            return value;
+        }
+    }
 
 
-//    public float expectiminimax(BoardGame node, int depth) {
-//        if (Movement.checkWinState(node) || depth == 0)
-//            return heuristicValue(node);
-//        if (adversaryToPlay(node)) {
-//            // Return value of minimum-valued child node
-//            float alpha = Float.POSITIVE_INFINITY;
-//            for (BoardGame child :movement.getNextOptions(node,5))
-//                alpha = Math.min(alpha, expectiminimax(child, depth - 1));
-//            return alpha;
-//        } else if (weAreToPlay(node)) {
-//            // Return value of maximum-valued child node
-//            float alpha = Float.NEGATIVE_INFINITY;
-//            for (BoardGame child :movement.getNextOptions(node,5))
-//                alpha = Math.max(alpha, expectiminimax(child, depth - 1));
-//            return alpha;
-//        } else if (randomEvent(node)) {
-//            // Return weighted average of all child nodes' values
-//            float alpha = 0;
-//            for (BoardGame child : movement.getNextOptions(node,5))
-//                alpha += probability(child) * expectiminimax(child, depth - 1);
-//            return alpha;
-//        }
-//        return 0;  // Default return value
-//    }
-//
-//
-//
 
-//
+
+
+    //
 //
     private float probability(BoardGame child) {
-        return 0;
+        return 0.5F;
     }
 //
 
@@ -143,16 +153,16 @@ public class ExpectiminimaxPlayer   {
             }
         }
         float  bestFinalManhattan = 336 / finalManhattan;
-        System.out.println("the protection");
-        System.out.println(protectedStones);
-        System.out.println("the number of stones");
-        System.out.println(bStoneCount);
-        System.out.println("the number of stones in Goal index");
-        System.out.println(GoalStones);
-        System.out.println("the number of  Killed stones");
-        System.out.println(node.killedStonesCount);
-        System.out.println("the final manhattan");
-        System.out.println(finalManhattan);
+//        System.out.println("the protection");
+//        System.out.println(protectedStones);
+//        System.out.println("the number of stones");
+//        System.out.println(bStoneCount);
+//        System.out.println("the number of stones in Goal index");
+//        System.out.println(GoalStones);
+//        System.out.println("the number of  Killed stones");
+//        System.out.println(node.killedStonesCount);
+//        System.out.println("the final manhattan");
+//        System.out.println(finalManhattan);
 
 
         int heuristic = 10 * node.killedStonesCount + 20 * GoalStones + 15 * protectedStones + 30 * bStoneCount;

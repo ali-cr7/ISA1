@@ -1,7 +1,7 @@
 package Logic;
 import Structure.BoardGame;
 import Structure.Positions;
-import Throwing.ExpectiminimaxPlayer;
+//import Throwing.ExpectiminimaxPlayer;
 import Throwing.Playing;
 
 import java.util.*;
@@ -10,7 +10,7 @@ public class Movement {
     private static Scanner input=new Scanner(System.in);
     public  static boolean isKilled =false;
     BoardGame boardGame = new BoardGame();
-    ExpectiminimaxPlayer expectiminimaxPlayer = new ExpectiminimaxPlayer();
+    //ExpectiminimaxPlayer expectiminimaxPlayer = new ExpectiminimaxPlayer();
            private int numberOfStonesRemaining = 4; // Assuming each player starts with 4 stones
            private int Position = -1; // Initialize H position outside the loop
            public static void moveStone(String[] boardGame, String stone, int steps) {
@@ -67,6 +67,15 @@ public class Movement {
             boardGame[newIndex] += " " + stone;
 //            System.out.println("heelll333");
         }
+               if(currentIndex+steps <= 42) {    int correspondingIndex = currentIndex+34;
+                   if (boardGame[correspondingIndex+steps].contains("B")&&boardGame[correspondingIndex+steps].contains("P")) {
+                       return  false;
+                   }}
+
+               if(currentIndex+steps > 42){  int correspondingIndex1 = currentIndex-34;
+                   if (boardGame[correspondingIndex1+steps].contains("B")&&boardGame[correspondingIndex1+steps].contains("P")) {
+                       return  false;
+                   }}
 
         System.out.println("Stone " + stone + " moved to index " + newIndex + ".");
     }
@@ -250,8 +259,8 @@ public class Movement {
                 BoardGame copy = new BoardGame(s);
                 if (canMoveStone(copy, currentStone, steps + 1)) {
                     moveStone3(copy, currentStone, steps + 1);
-                   System.out.println("Heuristic value for stone " + currentStone + " after an extra step: " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone after an extra step
-                    boardGame.printBoard(copy);
+                 //  System.out.println("Heuristic value for stone " + currentStone + " after an extra step: " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone after an extra step
+//                    boardGame.printBoard(copy);
                     next.add(copy);
                 }
             }
@@ -266,8 +275,8 @@ public class Movement {
                 BoardGame copy=  deepCopyBoardGame(copyWithNewStone);
                 if (canMoveStone(copy, currentStone, steps)) {
                     moveStone3(copy, currentStone, steps);
-                    System.out.println("Heuristic value for stone " + currentStone + " after moving with the new stone added: " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone after moving with the new stone added
-                   boardGame.printBoard(copy);
+              //      System.out.println("Heuristic value for stone " + currentStone + " after moving with the new stone added: " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone after moving with the new stone added
+//                   boardGame.printBoard(copy);
                     next.add(copy);
                 }
             }
@@ -277,7 +286,7 @@ public class Movement {
                 BoardGame copy = new BoardGame(s);
                 if (canMoveStone(copy, currentStone, steps)) {
                     moveStone3(copy, currentStone, steps);
-                    System.out.println("Heuristic value for stone " + currentStone + ": " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone
+                 //   System.out.println("Heuristic value for stone " + currentStone + ": " + expectiminimaxPlayer.heuristicValue(copy)); // Print the heuristic value for the current stone
                     next.add(copy);
                 }
             }
